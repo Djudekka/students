@@ -10,15 +10,23 @@
     <link rel="stylesheet" href="resources/css/style.css">
 </head>
 <body>
-  <div>
-      <h1>Система управления студентами и их успеваемостью</h1>
-      <a href="">Logout</a>
-  </div>
-   <div>
-       <a href="/students">Студенты</a>
-       <a href="">Дисциплины</a>
-       <a href="">Семестры</a>
-   </div>
-
+<div id="container">
+    <header>
+        <nav class="head">
+            <h1 class="title">Система управления студентами и их успеваемостью</h1>
+            <div class="login">
+                <div><p>Привет, admin!</p></div>
+                <div><a href="/logout">Logout</a></div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="menu_title">
+            <a href="/students">Студенты</a>
+            <a href="/disciplines">Дисциплины</a>
+            <a href="/terms">Семестры</a>
+        </section>
+    </main>
+</div>
 </body>
 </html>
