@@ -41,7 +41,7 @@
             <div class="main">
                 <h2>Для создания студента заполните все поля и нажмите кнопку "Создать".</h2>
                 <div class="form_cm">
-                    <form action="/student_creating" method="post">
+                    <form action="/student-creating" method="post">
                         <div class="line2">
                             <div>Фамилия</div>
                             <label>

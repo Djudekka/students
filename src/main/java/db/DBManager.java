@@ -20,7 +20,7 @@ public class DBManager {
     public static final String ID_GROUP = "id_group";
     public static final String GROUP = "group";
     public static final String DATE = "date";
-
+    public static final String DISCIPLINE = "discipline";
 
     public static List<Student> getAllActiveStudent() {
 
@@ -65,10 +65,14 @@ public class DBManager {
             ResultSet resultSet = statement.executeQuery("select d.id, d.discipline from discipline as d where status = '1'");
 
             while (resultSet.next()) {
-
+                Discipline discipline = new Discipline();
+                discipline.setId(resultSet.getInt(ID));
+                discipline.setDiscipline(resultSet.getString(DISCIPLINE));
+                disciplines.add(discipline);
             }
 
         } catch (Exception e) {
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
         return disciplines;
@@ -88,6 +92,7 @@ public class DBManager {
             }
 
         } catch (Exception e) {
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
         return terms;
@@ -192,6 +197,68 @@ public class DBManager {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/students_1?user=root&password=yhbASD");
             Statement statement = connection.createStatement();
             statement.execute("UPDATE student SET `surname` = '" + surname + "', `name` = '" + name + "', `id_group` = '"+ groupId +"', `date` = '" + dateForDB + "' WHERE (`id` = '" + id + "');");
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void createDiscipline(String discipline) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/students_1?user=root&password=yhbASD");
+            Statement statement = connection.createStatement();
+            statement.execute("INSERT INTO discipline (`discipline`) VALUES ('" + discipline + "');");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void deleteDiscipline(String[] ids) {
+        String stringIds = formIdsForQuery(ids);
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/students_1?user=root&password=yhbASD");
+            Statement statement = connection.createStatement();
+            statement.execute("UPDATE discipline SET `status` = '0' WHERE id in (" + stringIds + ");");
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static Discipline getDisciplinetById(String id) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/students_1?user=root&password=yhbASD");
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("select d.id, d.discipline from " +
+                    "discipline as d where d.id = '" + id + "';");
+
+            while (resultSet.next()) {
+                Discipline discipline = new Discipline();
+                discipline.setId(resultSet.getInt(ID));
+                discipline.setDiscipline(resultSet.getString(DISCIPLINE));
+
+                return discipline;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
+
+    public static void modifyDiscipline(String id, String discipline) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/students_1?user=root&password=yhbASD");
+            Statement statement = connection.createStatement();
+            statement.execute("UPDATE discipline SET `discipline` = '" + discipline + "' WHERE (`id` = '" + id + "');");
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);

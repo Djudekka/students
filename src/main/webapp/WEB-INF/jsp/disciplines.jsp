@@ -11,6 +11,7 @@
     <title>Disciplines List</title>
       <link rel="stylesheet" href="../../resources/css/style.css?v=1">
     <link rel="stylesheet" href="../../resources/fonts/fonts.css?v=1">
+    <script src="../../resources/js/functions.js"></script>
 </head>
 <body>
 <div id="container">
@@ -18,13 +19,8 @@
         <nav class="head">
             <h1 class="title">Система управления студентами и их успеваемостью</h1>
             <div class="login">
-
-
                 <div><p>Привет, admin!</p></div>
                 <div><a href="/logout">Logout</a></div>
-
-
-
             </div>
         </nav>
     </header>
@@ -44,74 +40,26 @@
 
                                 <th class="ld_col1">Наименование дисциплины</th>
                             </tr>
-
+                           <c:forEach items="${disciplines}" var="d">
                             <tr>
 
-                                <td class="ld_col0"><label><input name="idDiscipline" type="checkbox" value="1"></label></td>
+                                <td class="ld_col0"><label><input name="idDiscipline" type="checkbox" value="${d.id}"></label></td>
 
-                                <td class="ld_col1">Высшая математика</td>
+                                <td class="ld_col1">${d.discipline}</td>
                             </tr>
-
-                            <tr>
-
-                                <td class="ld_col0"><label><input name="idDiscipline" type="checkbox" value="2"></label></td>
-
-                                <td class="ld_col1">История Науки и Техники</td>
-                            </tr>
-
-                            <tr>
-
-                                <td class="ld_col0"><label><input name="idDiscipline" type="checkbox" value="3"></label></td>
-
-                                <td class="ld_col1">Политология</td>
-                            </tr>
-
-                            <tr>
-
-                                <td class="ld_col0"><label><input name="idDiscipline" type="checkbox" value="4"></label></td>
-
-                                <td class="ld_col1">Информатика</td>
-                            </tr>
-
-                            <tr>
-
-                                <td class="ld_col0"><label><input name="idDiscipline" type="checkbox" value="5"></label></td>
-
-                                <td class="ld_col1">Теория Алгоритмизации</td>
-                            </tr>
-
-                            <tr>
-
-                                <td class="ld_col0"><label><input name="idDiscipline" type="checkbox" value="6"></label></td>
-
-                                <td class="ld_col1">Системный Анализ</td>
-                            </tr>
-
-                            <tr>
-
-                                <td class="ld_col0"><label><input name="idDiscipline" type="checkbox" value="7"></label></td>
-
-                                <td class="ld_col1">Управление проектами</td>
-                            </tr>
-
-                            <tr>
-
-                                <td class="ld_col0"><label><input name="idDiscipline" type="checkbox" value="8"></label></td>
-
-                                <td class="ld_col1">Основы Дискретной Математики</td>
-                            </tr>
-
+                           </c:forEach>
                         </table>
                     </div>
                     <div class="root_discipline">
                         <div class="button_group2">
 
-                            <form action="/discipline_creating">
+                            <form action="/discipline-creating">
                                 <input class="button_discipline" type="submit" value="Создать дисциплину…">
                             </form>
 
 
-                            <input class="button_discipline" type="submit" value="Модифицировать выбранную дисциплину…" onclick="modifyDisciplines()">
+                            <input class="button_discipline" type="submit" value="Модифицировать выбранную дисциплину…"
+                                   onclick="modifyDiscipline()">
                             <input class="button_discipline" type="submit" value="Удалить выбранную дисциплину…"
                                    onclick="deleteDisciplines()">
 
@@ -123,10 +71,10 @@
     </main>
    </div>
 </body>
-<form action="/discipline_deleting" method="post" id="deleteForm">
+<form action="/discipline-delete" method="post" id="deleteForm">
     <input type="hidden" id="deleteHidden" name="deleteHidden">
 </form>
-<form action="/discipline_modifying" method="get" id="modifyForm">
+<form action="/discipline-modify" method="get" id="modifyForm">
     <input type="hidden" id="modifyHidden" name="modifyHidden">
 </form>
 </html>

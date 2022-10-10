@@ -34,7 +34,7 @@
 
                     <input class="button_student1" type="submit"
                            value="Просмотреть успеваемость выбранных студентов" onclick="progressStudents()">
-                    <form action="/student_creating">
+                    <form action="/student-creating">
                         <input class="button_student2" type="submit" value="Создать студента…">
                     </form>
 

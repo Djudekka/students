@@ -15,7 +15,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-@WebServlet(name = "StudentCreatingController", urlPatterns = "/student_creating")
+@WebServlet(name = "StudentCreatingController", urlPatterns = "/student-creating")
 public class StudentCreatingController extends HttpServlet {
 
     @Override

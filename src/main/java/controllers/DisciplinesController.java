@@ -1,5 +1,8 @@
 package controllers;
 
+import db.DBManager;
+import entity.Discipline;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +13,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.List;
 
 @WebServlet(name = "DisciplinesController", urlPatterns = "/disciplines")
 public class DisciplinesController extends HttpServlet {
@@ -17,8 +21,8 @@ public class DisciplinesController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-
-
+        List<Discipline> disciplines = DBManager.getAllActiveDisciplines();
+        req.setAttribute("disciplines", disciplines);
         req.getRequestDispatcher("WEB-INF/jsp/disciplines.jsp").forward(req,resp);
     }
 }
